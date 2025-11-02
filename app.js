@@ -153,5 +153,23 @@ const products = [
         });
     });
 
-// (هذا القوس يجب أن يكون موجوداً مسبقاً في نهاية ملفك)
+// --- الخطوة 7: تفعيل التمرير الناعم (Smooth Scroll) ---
+
+// امسك بكل الروابط في النافبار (الشعار + الروابط العادية)
+document.querySelectorAll('.navbar a[href^="#"]').forEach(anchor => {
+
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault(); // امنع القفز الافتراضي
+
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+
+        if (targetElement) {
+            // اجعل الصفحة تنزلق بنعومة إلى القسم المطلوب
+            targetElement.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    });
+});
 });
