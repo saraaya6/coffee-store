@@ -62,6 +62,7 @@ body {
   height: auto;
   margin-bottom: 15px;
   border-radius: 10px;
+  pointer-events: none;
 }
 .product-card .product-name{
   font-size: 1.25rem;
@@ -76,20 +77,36 @@ body {
   margin-bottom: 20px;
 }
 
-/* --- تصميم زر "أضف للسلة" --- */
+/* --- تصميم زر "أضف للسلة" (الجديد: مفرغ) --- */
 .product-card .add-to-cart-btn {
-    background: #795548; 
-    color: white;
-    border: none;
+    background: transparent;      /* 1. خلفية شفافة */
+    color: #795548;           /* 2. لون الخط بني (لون الموقع) */
+    border: 2px solid #795548; /* 3. إطار بني واضح */
     border-radius: 12px;
-    padding: 12px 24px;
+    padding: 10px 24px; /* (عدلت البادينج ليناسب الإطار) */
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(78, 52, 46, 0.3);
+    box-shadow: none; /* 4. إزالة الظل */
 }
 
+/* --- حالة تمرير الماوس (Hover) --- */
+.product-card .add-to-cart-btn:hover {
+    background: #795548; /* 1. الخلفية تمتلئ باللون البني */
+    color: white;           /* 2. الخط يصبح أبيض */
+    transform: translateY(-2px); /* (الحركة التي كانت موجودة) */
+    box-shadow: 0 6px 20px rgba(78, 52, 46, 0.4);
+}
+
+/* --- حالة "تمت الإضافة" (Disabled) --- */
+.product-card .add-to-cart-btn:disabled {
+    background: #A1887F; /* 1. لون بني أفتح (ليدل أنه تمت الإضافة) */
+    border-color: #A1887F;  /* 2. الإطار بنفس اللون */
+    color: #7c5e53;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
 /* --- تصميم زر "منتجاتنا" في الهيرو --- */
 .btn-custom{
   text-decoration: none;
@@ -143,15 +160,7 @@ body {
   z-index: 2;
 }
 
-/* ======== تنسيق الفوتر (ذيل الصفحة) ======== */
-footer.bg-dark {
-    background-color: #2D1E1A !important; 
-    border-top: 8px solid #795548; 
-}
-footer p {
-    font-size: 0.9rem;
-    color: #E0E0E0; 
-}
+
 
 /* ======== تنسيق الشريط العلوي (Top Bar) الملون ======== */
 .simple-top-bar {
@@ -226,4 +235,79 @@ footer p {
 .product-carousel.active-drag {
     cursor: grabbing; /* شكل اليد المقبوضة عند الضغط */
     cursor: -webkit-grabbing;
+}
+
+
+/* --- تنسيق أيقونة السلة --- */
+.cart-icon-container {
+    position: relative; /* لجعل الرقم يطفو فوقه */
+}
+
+.cart-icon-container .bi-cart-fill {
+    font-size: 1.8rem; /* حجم أيقونة السلة */
+    color: #E0E0E0; /* لون بيج فاتح (نفس لون الروابط) */
+    cursor: pointer;
+}
+
+.cart-icon-container .cart-counter {
+    position: absolute; /* يطفو فوق الأيقونة */
+    top: -5px;          /* مكان الرقم (فوق) */
+    right: -10px;       /* مكان الرقم (يمين) */
+
+    background-color: #795548; /* لون بني (نفس لون زر الإضافة) */
+    color: white;           /* لون الخط أبيض */
+    font-weight: bold;
+    font-size: 0.8rem;      /* حجم خط الرقم */
+
+    width: 20px;            /* العرض */
+    height: 20px;           /* الارتفاع */
+    border-radius: 50%;     /* لجعله دائرياً */
+
+    display: flex;          /* لتوسيط الرقم داخل الدائرة */
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* --- تنسيق الفوتر الجديد --- */
+/* ======== تنسيق الفوتر (ذيل الصفحة) ======== */
+footer.bg-dark {
+    background-color: #3E2723 !important; /* (جربي هذا - نفس لون خلفية الصفحة) */
+    border-top: 8px solid #795548; 
+}
+footer h5 {
+    color: #fff; /* لون العناوين أبيض */
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+footer .footer-text {
+    color: #E0E0E0; /* لون بيج فاتح للنص */
+    font-size: 0.9rem;
+}
+
+.footer-links a {
+    color: #E0E0E0; /* لون بيج فاتح للروابط */
+    text-decoration: none;
+    transition: color 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+    color: #A1887F; /* لون بني فاتح عند التمرير */
+}
+
+.social-icons a {
+    color: #E0E0E0; /* لون بيج فاتح للأيقونات */
+    font-size: 1.8rem; /* حجم الأيقونات */
+    margin-left: 15px;
+    transition: color 0.2s ease;
+}
+
+.social-icons a:hover {
+    color: #A1887F; /* لون بني فاتح عند التمرير */
+}
+
+.footer-hr {
+    border-top: 1px solid #5D4037; /* لون الخط الفاصل */
 }

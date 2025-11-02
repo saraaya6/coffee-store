@@ -92,8 +92,8 @@ const products = [
                         <h5 class="product-name">${product.name}</h5>
                         <p class="product-price">${product.price} ر.س</p>
                         <button class="add-to-cart-btn">
-                            <span class="bi bi-bag-plus"> أضف إلى السلة</span>
-                        </button>
+                <span><i class="bi bi-bag-plus"></i> أضف إلى السلة</span>
+            </button>
                     </div> 
                 </div>
             `;
@@ -171,5 +171,47 @@ document.querySelectorAll('.navbar a[href^="#"]').forEach(anchor => {
             });
         }
     });
+
 });
+
+
+// --- الخطوة 7: تفعيل سلة المشتريات ---
+let cartCount = 0;
+const cartCounterElement = document.getElementById('cart-counter');
+const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+
+addToCartButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        // 1. زيادة العداد
+        cartCount++;
+
+        // 2. تحديث الرقم الظاهر في السلة
+        cartCounterElement.innerText = cartCount;
+
+        // 3. (تعديل) تغيير الزر بعد الضغط
+        // (استخدام أيقونة "صح" بدلاً من النص)
+        button.innerHTML = '<span><i class="bi bi-check-lg"></i> تمت الإضافة</span>';
+        button.disabled = true; // تعطيل الزر (ليأخذ تنسيق CSS)
+        // (تم حذف سطر button.style.background)
+    });
+});
+
+// --- الخطوة 8: تفعيل التمرير الناعم (Smooth Scroll) ---
+// (أضفت هذا الكود أيضاً لأنه ناقص لديكِ)
+document.querySelectorAll('.navbar a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault(); // منع القفز الافتراضي
+
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: 'smooth' // اجعل التمرير ناعماً
+            });
+        }
+    });
+});
+
+
 });
