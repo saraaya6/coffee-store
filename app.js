@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // الخطوة 1: تعريف "قاعدة البيانات الوهمية" للمنتجات
-    const products = [
+const products = [
         {
             id: 1,
             name: 'براوني كيتو (قطعة)',
@@ -39,28 +39,28 @@ document.addEventListener('DOMContentLoaded', () => {
             image: 'images/latte.png'
         },
         {
-            id: 5,
+            id: 6, // <-- تم التصحيح
             name: 'اسبريسو',
             category: 'قهوة',
             price: 24,
             image: 'images/Espresso.png'
         },
         {
-            id: 6,
+            id: 7, // <-- تم التصحيح
             name: 'كوكيز شوفان (قطعتين)',
             category: 'حلويات',
             price: 15,
             image: 'images/cookies.png'
         },
         {
-            id: 7,
+            id: 8, // <-- تم التصحيح
             name: 'كولد برو',
             category: 'قهوة',
             price: 18,
             image: 'images/cold-brew.png'
         },
         {
-            id: 8,
+            id: 9, // <-- تم التصحيح
             name: 'تشيزكيك توت نباتي',
             category: 'حلويات',
             price: 25,
@@ -112,5 +112,46 @@ document.addEventListener('DOMContentLoaded', () => {
     displayProducts(coffeeProducts, coffeeContainer);
     // أرسل منتجات الحلويات إلى حاوية الحلويات
     displayProducts(sweetProducts, sweetsContainer);
+// --- الخطوة 6: تفعيل السحب بالماوس (Drag-to-Scroll) ---
+    
+    // 1. نمسك بكل الكاروسيلات (الأقسام المتحركة)
+    const sliders = document.querySelectorAll('.product-carousel');
+    
+    sliders.forEach(slider => {
+        let isDown = false; // هل الماوس مضغوط؟
+        let startX;       // أين بدأ الضغط؟
+        let scrollLeft;   // أين كان مكان التمرير؟
 
+        // عندما تضغط بالماوس على الكاروسيل
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.classList.add('active-drag'); // أضف كلاس لتغيير شكل الماوس
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+        
+        // عندما تترك الماوس
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            slider.classList.remove('active-drag');
+        });
+
+        // عندما يغادر الماوس منطقة الكاروسيل
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+            slider.classList.remove('active-drag');
+        });
+
+        // عندما يتحرك الماوس
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return; // توقف إذا لم يكن الماوس مضغوطاً
+            
+            e.preventDefault(); // امنع السلوك الافتراضي (مثل تحديد النص)
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2; // ( * 2 لجعل السحب أسرع)
+            slider.scrollLeft = scrollLeft - walk;
+        });
+    });
+
+// (هذا القوس يجب أن يكون موجوداً مسبقاً في نهاية ملفك)
 });

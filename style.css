@@ -86,7 +86,7 @@ body {
 /* --- تصميم زر "منتجاتنا" في الهيرو --- */
 .btn-custom{
   text-decoration: none;
-  background: #8D6E63; 
+  background: #7c5e53; 
   color: white;
   border: none;
   border-radius: 12px;
@@ -102,6 +102,7 @@ body {
     background: #A1887F; 
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(78, 52, 46, 0.4);
+    color: white;
 }
 
 .product-card .add-to-cart-btn:hover {
@@ -113,9 +114,9 @@ body {
 /* ======== تنسيق الهيرو سيكشن ======== */
 .container-fluid-hero-section {
   min-height: 80vh; 
-  background-image: url('images/hero.jpg'); 
+  background-image: url('images/hero.png'); 
   background-size: cover;
-  background-position: center;
+  background-position: top center;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -206,4 +207,16 @@ footer p {
 }
 .product-carousel::-webkit-scrollbar-thumb:hover {
     background: #A1887F;
+}
+
+/* --- تنسيق السحب (Drag) للكاروسيل --- */
+.product-carousel {
+    cursor: grab; /* شكل اليد المفتوحة */
+    cursor: -webkit-grab;
+    user-select: none; /* منع تحديد النصوص أثناء السحب */
+}
+
+.product-carousel.active-drag {
+    cursor: grabbing; /* شكل اليد المقبوضة عند الضغط */
+    cursor: -webkit-grabbing;
 }
