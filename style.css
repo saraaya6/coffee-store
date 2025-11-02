@@ -205,3 +205,35 @@ footer p {
 .top-bar-link:hover {
   color: #b0c4de; /* (درجة أزرق فاتح باهت) */
 }
+
+
+/* --- أزرار الفلترة --- */
+.filter-buttons {
+  /* نستخدم ltr لضمان ترتيب الأزرار (قهوة - حلويات)
+    حتى لو كانت الصفحة كلها باللغة العربية
+  */
+  direction: ltr; 
+}
+
+.btn-filter {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 20px;
+  padding: 8px 20px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-filter:hover {
+  background-color: #555;
+}
+
+/* هذا الكلاس سيعطى للزر الفعّال */
+.btn-filter.active {
+  /* نستخدم نفس تدرج الألوان الجميل من تصميمك */
+  background: linear-gradient(145deg, #171f3e, #294772);
+  border-color: #294772;
+}

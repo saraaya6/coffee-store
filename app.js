@@ -100,3 +100,45 @@ document.addEventListener('DOMContentLoaded', () => {
     displayProducts(products);
 
 });
+
+// (الكود هذا يضاف داخل app.js، بعد تعريف productContainer)
+
+// الخطوة 5: الإمساك بأزرار الفلترة
+const filterAllBtn = document.getElementById('filter-all');
+const filterCoffeeBtn = document.getElementById('filter-coffee');
+const filterSweetsBtn = document.getElementById('filter-sweets');
+// نمسك كل الأزرار لكي نتحكم بكلاس 'active'
+const allFilterButtons = document.querySelectorAll('.btn-filter');
+
+// دالة صغيرة لإدارة الكلاس 'active' بين الأزرار
+function setActiveButton(activeBtn) {
+    // أولاً: أزل 'active' من كل الأزرار
+    allFilterButtons.forEach(btn => {
+        btn.classList.remove('active');
+    });
+    // ثانياً: أضف 'active' للزر الذي تم الضغط عليه
+    activeBtn.classList.add('active');
+}
+
+// الخطوة 6: إضافة مستمعي الأحداث (Event Listeners) للأزرار
+
+// زر "الكل"
+filterAllBtn.addEventListener('click', () => {
+    setActiveButton(filterAllBtn); // تفعيل الزر
+    displayProducts(products); // اعرض جميع المنتجات
+});
+
+// زر "قهوة"
+filterCoffeeBtn.addEventListener('click', () => {
+    setActiveButton(filterCoffeeBtn); // تفعيل الزر
+    // نستخدم دالة .filter لإنشاء مصفوفة جديدة
+    const coffeeProducts = products.filter(product => product.category === 'قهوة');
+    displayProducts(coffeeProducts); // اعرض القهوة فقط
+});
+
+// زر "حلويات"
+filterSweetsBtn.addEventListener('click', () => {
+    setActiveButton(filterSweetsBtn); // تفعيل الزر
+    const sweetProducts = products.filter(product => product.category === 'حلويات');
+    displayProducts(sweetProducts); // اعرض الحلويات فقط
+});
