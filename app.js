@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const products = [
         {
             id: 1,
-            name: 'براوني كيتو (قطعة)',
+            name: 'براوني بروتين (قطعة)',
             category: 'حلويات',
             price: 18,
             image: 'images/brouniii.png'
