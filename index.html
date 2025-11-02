@@ -9,71 +9,76 @@
    <title>متجر قهوة وحلويات صحية</title>
 </head>
 
-<body>
+<body dir="rtl">
 
-    <div class="simple-top-bar">
+    <nav class="navbar navbar-expand-lg navbar-dark main-navbar sticky-top">
         <div class="container">
-            <div class="d-flex justify-content-end">
-                <a href="#" class="top-bar-link">تواصل معنا</a>
-                <a href="#" class="top-bar-link">تسجيل الدخول</a>
+            <a class="navbar-brand" href="#">متجر القهوة الصحية</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">الرئيسية</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#coffee-section">قهوة</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#sweets-section">حلويات صحية</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">أكواب قهوة</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">محاصيل قهوة</a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </div> 
-
+    </nav>
     
     <div class="container-fluid-hero-section">
-    <div class="hero-content text-center">
-        <h1 class="display-4 fw-bold text-white"> مرحبا بك في القهوة</h1>
-        <p class="fs-4 text-white">قهوتك وحلاك الصحي بضغطة زر</p>
-        <a href="#products" class="btn-custom">منتجاتنا </a>
-    </div>
-</div>
-</div>
-
-
-
-
-
-
-<div class="container mt-4" id="products">
-    
-    <div class="row">
-    <div class="col-12 text-start mb-4 d-flex justify-content-between align-items-center">
-        <h2 class="display-5 fw-bold">منتجاتنا</h2>
-        <div class="filter-buttons">
-            <button class="btn-filter active" id="filter-all">الكل</button>
-            <button class="btn-filter" id="filter-coffee">قهوة</button>
-            <button class="btn-filter" id="filter-sweets">حلويات</button>
+        <div class="hero-content text-center">
+            <h1 class="display-4 fw-bold text-white"> مرحبا بك في القهوة</h1>
+            <p class="fs-4 text-white">قهوتك وحلاك الصحي بضغطة زر</p>
+            <a href="#products" class="btn-custom">منتجاتنا </a>
         </div>
     </div>
-</div>
 
-        </div> 
-</div>
+    <div class="container mt-5" id="products">
 
-<div class="container mt-4">
+        <div class="carousel-section" id="coffee-section">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="fw-bold">قسم القهوة</h3>
+                <a href="#" class="view-all-link">عرض الكل &larr;</a>
+            </div>
+            <div class="product-carousel" id="coffee-carousel-container">
+                </div>
+        </div>
 
-    <div class="row" id="product-list-container">
+        <div class="carousel-section" id="sweets-section">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="fw-bold">قسم الحلويات الصحية</h3>
+                <a href="#" class="view-all-link">عرض الكل &larr;</a>
+            </div>
+            <div class="product-carousel" id="sweets-carousel-container">
+                </div>
+        </div>
+
     </div>
 
-
-
-        </div> </div>
-
-         <footer class="bg-dark text-light text-center p-4 mt-5">
-    <div class="container">
-        <p class="mb-0">&copy; 2025 Bit Store. جميع الحقوق محفوظة.</p>
+    <footer class="bg-dark text-light text-center p-4 mt-5">
+        <div class="container">
+            <p class="mb-0">&copy; 2025 متجر القهوة الصحية. جميع الحقوق محفوظة.</p>
         </div>
     </footer>
 
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-         crossorigin="anonymous"></script>
-
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
     <script src="app.js" ></script>    
 
-
 </body>
-
 </html>
