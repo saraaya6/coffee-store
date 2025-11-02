@@ -165,19 +165,19 @@ footer p {
 /* --- قسم الكاروسيل (المنتجات المتحركة) --- */
 .carousel-section {
     margin-top: 40px;
+  
 }
 .carousel-section h3 {
-    color: #fff; /* لون العنوان (أبيض) */
+    color: #795548; /* لون العنوان (أبيض) */
 }
 .view-all-link {
-    color: #F5F5DC; /* لون بيج (كريمي) */
+    color: #795548; /* لون بيج (كريمي) */
     text-decoration: none;
     font-weight: bold;
     direction: ltr; /* لضمان اتجاه السهم صحيح */
 }
-.view-all-link:hover {
-    color: #fff;
-}
+
+
 .product-carousel {
     display: flex;
     flex-wrap: nowrap; /* يمنع نزول الكروت لسطر جديد */
