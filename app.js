@@ -91,9 +91,10 @@ const products = [
                     <div class="card-body">
                         <h5 class="product-name">${product.name}</h5>
                         <p class="product-price">${product.price} ر.س</p>
+                        
                         <button class="add-to-cart-btn">
-                <span><i class="bi bi-bag-plus"></i> أضف إلى السلة</span>
-            </button>
+                         <span><i class="bi bi-bag"></i> أضف إلى السلة</span>
+                    </button>
                     </div> 
                 </div>
             `;
@@ -189,10 +190,8 @@ addToCartButtons.forEach(button => {
         cartCounterElement.innerText = cartCount;
 
         // 3. (تعديل) تغيير الزر بعد الضغط
-        // (استخدام أيقونة "صح" بدلاً من النص)
         button.innerHTML = '<span><i class="bi bi-check-lg"></i> تمت الإضافة</span>';
-        button.disabled = true; // تعطيل الزر (ليأخذ تنسيق CSS)
-        // (تم حذف سطر button.style.background)
+        button.disabled = true;
     });
 });
 

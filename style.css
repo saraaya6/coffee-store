@@ -77,18 +77,36 @@ body {
   margin-bottom: 20px;
 }
 
-/* --- تصميم زر "أضف للسلة" (الجديد: مفرغ) --- */
+/* --- تصميم زر "أضف للسلة" (الجديد: أنيق ومفرغ) --- */
 .product-card .add-to-cart-btn {
-    background: transparent;      /* 1. خلفية شفافة */
-    color: #795548;           /* 2. لون الخط بني (لون الموقع) */
-    border: 2px solid #795548; /* 3. إطار بني واضح */
+    background: transparent;          /* 1. خلفية شفافة (مفرغ) */
+    color: #795548;               /* 2. لون الخط والأيقونة بني (لون الموقع) */
+    border: 2px solid #795548;     /* 3. إطار بني سميك قليلاً */
     border-radius: 12px;
-    padding: 10px 24px; /* (عدلت البادينج ليناسب الإطار) */
+    padding: 10px 24px;
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: none; /* 4. إزالة الظل */
+
+    /* 4. حركة انتقالية ناعمة جداً */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    box-shadow: none;
+}
+
+/* --- هذا ما طلبتِه: حالة تمرير الماوس (Hover) --- */
+.product-card .add-to-cart-btn:hover {
+    background: #795548; /* 1. الخلفية تمتلئ باللون البني */
+    color: white;           /* 2. الخط والأيقونة تصبح بيضاء */
+    transform: translateY(-2px); 
+}
+
+/* --- حالة "تمت الإضافة" (Disabled) --- */
+.product-card .add-to-cart-btn:disabled {
+    background: #A1887F; /* 1. لون بني أفتح (ليدل أنه تمت الإضافة) */
+    border-color: #A1887F;  /* 2. الإطار بنفس اللون */
+    color: white;
+    cursor: not-allowed;
+    opacity: 0.9;
 }
 
 /* --- حالة تمرير الماوس (Hover) --- */
@@ -129,11 +147,7 @@ body {
     color: white;
 }
 
-.product-card .add-to-cart-btn:hover {
-    background: #A1887F; 
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(78, 52, 46, 0.4);
-}
+
 
 /* ======== تنسيق الهيرو سيكشن ======== */
 .container-fluid-hero-section {
