@@ -264,3 +264,27 @@ footer p {
     justify-content: center;
     align-items: center;
 }
+
+/* --- إصلاح نهائي لمكان السلة في الجوال --- */
+@media (max-width: 991.98px) {
+
+  /* 1. ننتزع السلة من القائمة المنسدلة ونثبتها في الشريط العلوي */
+  .cart-icon-container {
+    position: absolute; /* (انتزاعها من مكانها) */
+
+    top: 12px;  /* (توسيطها عمودياً مع الخطوط) */
+
+    /* (بما أن الخطوط في أقصى اليسار، نضعها بجانبها) */
+    left: 60px; 
+
+    /* (إلغاء أي هوامش قديمة) */
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  /* 2. نعطي القائمة المنسدلة (الروابط) مساحة في الأسفل
+     حتى لا تظهر السلة فوقها عند الفتح */
+  #navbarNav .navbar-nav {
+     padding-top: 15px;
+  }
+}
