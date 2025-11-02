@@ -1,0 +1,207 @@
+
+
+/* --- إعدادات أساسية للصفحة --- */
+body {
+  /* هذا يغير لون خلفية الصفحة كاملة للأسود */
+  background: #000000; 
+  
+  /* !! نقطة مهمة جداً !! */
+  /* لازم تغيري لون الخط الأساسي للأبيض، وإلا الكلام بيختفي */
+  color: #ffffff;
+  font-family: Arial, sans-serif; /* استخدام خط نظيف (يمكنك تغييره لاحقاً) */
+  margin: 0;
+}
+
+/* --- حاوية الكروت (للمسافات والتوسيط) --- */
+.product-container {
+  display: flex; /* أهم خاصية: لترتيب الكروت بجانب بعضها */
+  flex-wrap: wrap; /* للسماح للكروت بالنزول لسطر جديد في الشاشات الصغيرة */
+  justify-content: center; /* لتوسيط الكروت في منتصف الصفحة */
+  gap: 20px; /* المسافة الرائعة بين كل كرت وآخر */
+}
+
+/* --- تصميم كرت المنتج الاحترافي --- */
+.product-card {
+  /* (تم تصحيح الاسم من .prodoct-card) */
+  background-color: #ffffff; /* اللون الأبيض يعطي إحساس بالنظافة والاحترافية */
+  border-radius: 15px; /* حواف دائرية معتدلة */
+  
+  /* اللمسة الاحترافية: الظل 
+    يعطي عمق للكرت ويفصله عن الخلفية
+  */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  padding: 20px;
+  text-align: center;
+; /* تحديد عرض ثابت لضمان تناسق الكروت */
+  
+  /* تأثير ناعم عند تمرير الماوس 
+    (ينقل الكرت والظل ببطء)
+  */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* --- تأثير عند تمرير الماوس فوق الكرت --- */
+.product-card:hover {
+  transform: translateY(-5px); /* يرفع الكرت للأعلى قليلاً */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* ظل أوضح عند التمرير */
+}
+
+/* --- تنسيق العناصر داخل الكرت --- */
+
+.product-card img {
+  width: 100%; /* لجعل الصورة تأخذ عرض الكرت بالكامل (داخل الـ padding) */
+  height: auto; /* للحفاظ على أبعاد الصورة */
+  margin-bottom: 15px;
+  border-radius: 10px; /* حواف دائرية للصورة أيضاً */
+}
+
+.product-card .product-name{
+  font-size: 1.25rem; /* حجم خط أكبر للعنوان (20px) */
+  color: #272863; /* لون أسود غير فاقع */
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.product-card .product-price {
+  font-size: 1.1rem; /* (18px) */
+  font-weight: bold;
+  color: #5b8ec4; /* لون أزرق مميز للسعر */
+  margin-bottom: 20px;
+}
+
+/* --- تصميم الزر (مهم جداً) --- */
+/* --- ... تصميم الزر (استبدل الكود القديم بهذا) ... --- */
+.product-card .add-to-cart-btn {
+    /* الألوان الأساسية للزر (تدرج لوني مستوحى من ألوان آبل) */
+    background: linear-gradient(145deg, #171f3e, #294772); /* تدرج من أزرق ساطع إلى أزرق أعمق */
+    color: white;             /* لون الخط أبيض */
+    
+    /* الشكل والأبعاد */
+    border: none;             /* إزالة الإطار الافتراضي */
+    border-radius: 12px;      /* حواف دائرية أكثر نعومة (مثل زوايا الآيفون) */
+    padding: 12px 24px;       /* مساحة داخلية مريحة */
+    
+    /* الخط والسلوك */
+    font-size: 1rem;          /* (16px) */
+    font-weight: bold;         /* خط أعرض (bold) قليلاً ليكون أوضح */
+    cursor: pointer;          /* تغيير شكل المؤشر عند التمرير */
+    
+    /* تأثيرات ناعمة */
+    transition: all 0.3s ease; /* تأثير شامل ناعم (للون والظل) */
+    box-shadow: 0 4px 15px rgba(0, 122, 255, 0.2); /* ظل خفيف بلون الزر نفسه */
+}
+.btn-custom{
+  text-decoration: none; /* 5. إزالة الخط تحت الرابط */
+  /* الألوان الأساسية للزر (تدرج لوني مستوحى من ألوان آبل) */
+    background: linear-gradient( 145deg, #171f3e, #294772); /* تدرج من أزرق ساطع إلى أزرق أعمق */
+    color: white;             /* لون الخط أبيض */
+    
+    /* الشكل والأبعاد */
+    border: none;             /* إزالة الإطار الافتراضي */
+    border-radius: 12px;      /* حواف دائرية أكثر نعومة (مثل زوايا الآيفون) */
+    padding: 12px 24px;       /* مساحة داخلية مريحة */
+    
+    /* الخط والسلوك */
+    font-size: 2rem;          /* (16px) */
+    font-weight: bold;         /* خط أعرض (bold) قليلاً ليكون أوضح */
+    cursor: pointer;          /* تغيير شكل المؤشر عند التمرير */
+    
+    /* تأثيرات ناعمة */
+    transition: all 0.3s ease; /* تأثير شامل ناعم (للون والظل) */
+    box-shadow: 0 4px 15px rgba(179, 188, 199, 0.2); /* ظل خفيف بلون الزر نفسه */
+
+}
+
+.btn-custom .add-to-cart-btn:hover{
+      /* عكس التدرج قليلاً ورفعه للأعلى */
+    background: linear-gradient(145deg, #4a6c93, #3b73c6);
+    transform: translateY(-2px); /* حركة بسيطة للأعلى */
+    box-shadow: 0 6px 20px rgba(104, 107, 111, 0.3); /* ظل أوضح عند الرفع */
+}
+/* --- ... تصميم الزر عند تمرير الماوس (hover) ... --- */
+.product-card .add-to-cart-btn:hover {
+    /* عكس التدرج قليلاً ورفعه للأعلى */
+    background: linear-gradient(145deg, #4a6c93, #3b73c6);
+    transform: translateY(-2px); /* حركة بسيطة للأعلى */
+    box-shadow: 0 6px 20px rgba(191, 200, 211, 0.3); /* ظل أوضح عند الرفع */
+}
+
+
+/* ======== تنسيق الهيرو سيكشن ======== */
+.container-fluid-hero-section {
+  /* 1. تحديد الارتفاع (مثلاً 80% من طول الشاشة) */
+  min-height: 80vh; 
+
+  /* 2. إضافة الصورة كخلفية */
+  /* !!! ضروري: غيري المسار إلى مسار صورتك الصحيح !!! */
+  background-image: url('images/hero.jpg'); 
+  background-size: cover; /* يخلي الصورة تغطي المساحة كاملة */
+  background-position: center; /* يركز الصورة في النص */
+
+  /* 3. لتوسيط المحتوى (النصوص والزر) */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* 4. (اختياري) إضافة طبقة معتمة عشان الكلام يبان أوضح */
+  position: relative; 
+}
+
+/* هذا الكود يضيف طبقة سوداء شفافة فوق الصورة */
+.container-fluid-hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* لون أسود شفاف 40% */
+}
+
+/* نخلي المحتوى فوق الطبقة الشفافة */
+.hero-content {
+  position: relative; /* هذا يضمن إن الكلام يكون فوق الطبقة المعتمة */
+  z-index: 2;
+}
+
+
+/* ======== تنسيق الفوتر (ذيل الصفحة) ======== */
+footer.bg-dark {
+    /* يمكنك استخدام لون الخلفية الأسود من البووت ستراب
+      أو تحديد لونك الخاص مثل هذا:*/
+      background-color: #111 !important; 
+    
+    
+    /* إضافة خط علوي باللون الأزرق المميز من تصميمك */
+    border-top: 8px solid #294772; 
+}
+
+footer p {
+    font-size: 0.9rem;
+    color: #ccc; /* لون رمادي فاتح قليلاً للنص */
+}
+
+
+/* ======== تنسيق الشريط العلوي (Top Bar) الملون ======== */
+
+.simple-top-bar {
+  /* 1. استخدام التدرج اللوني المطلوب (المطابق لزر الهيرو) */
+  background: linear-gradient(145deg, #171f3e, #294772); /* */
+  padding: 8px 0; 
+  /* 2. إزالة الخط السفلي (لم نعد بحاجته مع الخلفية الداكنة) */
+}
+
+.top-bar-link {
+  /* 3. تغيير لون الخط إلى الأبيض ليكون واضحاً */
+  color: #ffffff; 
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+/* 4. تغيير لون تمرير الماوس إلى لون فاتح */
+.top-bar-link:hover {
+  color: #b0c4de; /* (درجة أزرق فاتح باهت) */
+}
