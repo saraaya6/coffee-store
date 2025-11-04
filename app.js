@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 14,
             name: 'كوب القهوة',
             category: 'أكواب',
-            price: 30,
+            price: 0,
             image: 'images/logo-cup.png'
         },
         {
