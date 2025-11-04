@@ -64,7 +64,15 @@ document.addEventListener('DOMContentLoaded', () => {
             category: 'حلويات',
             price: 25,
             image: 'images/Cheesecake.png'
+        },
+        {
+            id: 10,
+            name: ' لاتيه مثلج',
+            category: 'قهوة',
+            price: 18,
+            image: 'images/iced-latte.png'
         }
+        
     ];
 
     // الخطوة 2: الإمساك بالحاويات
