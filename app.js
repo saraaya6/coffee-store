@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
-    // --- (جديد) سنحول العداد إلى مصفوفة حقيقية ---
+    // --- (ترقية) مصفوفة السلة أصبحت تخزن المنتجات والكميات ---
     let cartItems = []; 
     // ---------------------------------------------
 
@@ -165,30 +165,49 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartIcon = document.querySelector('.cart-icon-container');
     const cartModalBody = document.getElementById('cart-modal-body');
     const cartTotalPrice = document.getElementById('cart-total-price');
-    // (نحتاج للـ Modal نفسه لكي نظهره)
     const cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
+    const checkoutButton = document.querySelector('.btn-checkout'); // (جديد)
 
 
-    // الخطوة 3: دالة لإنشاء وعرض المنتجات (مع إضافة data-product-id)
+    // الخطوة 3: دالة لإنشاء وعرض المنتجات (لا تحتاج تعديل)
     function displayProducts(productsList, container) {
         if (!container) return;
         container.innerHTML = ''; 
 
         productsList.forEach(product => {
+            // (جديد) التحقق إذا كان المنتج معطلاً في السلة
+            const itemInCart = cartItems.find(item => item.product.id == product.id);
+            const isDisabled = itemInCart && itemInCart.quantity >= 50;
+            
             const productCardHTML = `
                 <div class="product-card">
                     <img src="${product.image}" class="card-img-top" alt="${product.name}">
                     <div class="card-body">
                         <h5 class="product-name">${product.name}</h5>
                         <p class="product-price">${product.price} ر.س</p>
-                        <button class="add-to-cart-btn" data-product-id="${product.id}">
-                            <span><i class="bi bi-bag"></i> أضف إلى السلة</span>
+                        <button class="add-to-cart-btn" data-product-id="${product.id}" ${isDisabled ? 'disabled' : ''}>
+                            ${isDisabled ? '<span><i class="bi bi-check-lg"></i> تمت الإضافة</span>' : '<span><i class="bi bi-bag"></i> أضف إلى السلة</span>'}
                         </button>
                     </div> 
                 </div>
             `;
             container.innerHTML += productCardHTML;
         });
+    }
+
+    // --- (جديد) دالة لإعادة رسم جميع أقسام المنتجات (لتحديث الأزرار المعطلة) ---
+    function refreshAllProducts() {
+        displayProducts(coffeeProducts, coffeeContainer);
+        displayProducts(sweetProducts, sweetsContainer);
+        displayProducts(cupProducts, cupsContainer);
+        displayProducts(beanProducts, beansContainer);
+    }
+    
+    // --- (جديد) دالة لتحديث عداد السلة الإجمالي ---
+    function updateCartCounter() {
+        // العداد الآن هو مجموع الكميات، وليس فقط عدد المنتجات
+        const totalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+        cartCounterElement.innerText = totalCount;
     }
 
     // الخطوة 4: فلترة البيانات وتوزيعها (كما هي)
@@ -198,10 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const beanProducts = products.filter(product => product.category === 'محاصيل');
 
     // الخطوة 5: تشغيل الدالة لكل قسم (كما هي)
-    displayProducts(coffeeProducts, coffeeContainer);
-    displayProducts(sweetProducts, sweetsContainer);
-    displayProducts(cupProducts, cupsContainer);
-    displayProducts(beanProducts, beansContainer);
+    refreshAllProducts();
 
     // الخطوة 6: تفعيل السحب بالماوس (كما هي)
     const sliders = document.querySelectorAll('.product-carousel');
@@ -220,73 +236,151 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- الخطوة 7: (ترقية) تفعيل سلة المشتريات ---
+    // --- الخطوة 7: (ترقية) تفعيل سلة المشتريات (لتدعم الكميات) ---
     document.body.addEventListener('click', function(e) {
         const button = e.target.closest('.add-to-cart-btn');
         if (button && !button.disabled) {
             
-            // (جديد) ابحث عن المنتج بدلاً من مجرد العد
             const productId = button.dataset.productId;
             const productToAdd = products.find(p => p.id == productId);
+            
+            // ابحث إذا كان المنتج موجوداً مسبقاً في السلة
+            const existingItem = cartItems.find(item => item.product.id == productId);
 
-            if(productToAdd) {
-                // (جديد) أضف المنتج الفعلي للمصفوفة
-                cartItems.push(productToAdd);
-                
-                // (تعديل) حدث العداد بناءً على طول المصفوفة
-                cartCounterElement.innerText = cartItems.length;
+            if (existingItem) {
+                // (جديد) إذا موجود، زد الكمية (بحد أقصى 10)
+                if (existingItem.quantity < 50) {
+                    existingItem.quantity++;
+                }
+                // (جديد) تعطيل الزر إذا وصلت للحد الأقصى
+                if (existingItem.quantity >= 50) {
+                    button.innerHTML = '<span><i class="bi bi-check-lg"></i> تمت الإضافة</span>';
+                    button.disabled = true;
+                }
+            } else {
+                // (جديد) إذا غير موجود، أضفه بكمية 1
+                cartItems.push({ product: productToAdd, quantity: 1 });
             }
             
-            // تغيير الزر بعد الضغط (كما هو)
-            button.innerHTML = '<span><i class="bi bi-check-lg"></i> تمت الإضافة</span>';
-            button.disabled = true; 
+            // (جديد) أظهر تأكيداً مؤقتاً على الزر
+            if (!button.disabled) {
+                const originalText = button.innerHTML;
+                button.innerHTML = '<span><i class="bi bi-check-lg"></i> تم الاضافة . . </span>';
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                }, 300); // إظهار الرسالة لثانية واحدة
+            }
+            
+            updateCartCounter(); // تحديث العداد
         }
     });
 
-    // --- (جديد) الخطوة 8: دالة لفتح وتحديث النافذة المنبثقة ---
+    // --- الخطوة 8: (ترقية) دالة لفتح وتحديث النافذة المنبثقة (لتدعم الكميات والحذف) ---
     function updateCartModal() {
-        // 1. مسح المحتوى القديم
         cartModalBody.innerHTML = '';
         
-        // 2. التحقق إذا كانت السلة فارغة
         if (cartItems.length === 0) {
             cartModalBody.innerHTML = '<p>سلتك فارغة حالياً.</p>';
             cartTotalPrice.innerText = '0 ر.س';
             return;
         }
 
-        // 3. بناء كروت المنتجات داخل السلة
         let total = 0;
         cartItems.forEach(item => {
             const itemHTML = `
                 <div class="cart-item">
-                    <img src="${item.image}" alt="${item.name}">
+                    <img src="${item.product.image}" alt="${item.product.name}">
                     <div class="cart-item-details">
-                        <h6>${item.name}</h6>
-                        <p>${item.category}</p>
+                        <h6>${item.product.name}</h6>
+                        <p>${item.product.category}</p>
                     </div>
-                    <span class="cart-item-price">${item.price} ر.س</span>
+                    
+                    <div class="cart-quantity-controls">
+                        <button class="btn-quantity" data-id="${item.product.id}" data-action="decrease">-</button>
+                        <span>${item.quantity}</span>
+                        <button class="btn-quantity" data-id="${item.product.id}" data-action="increase" ${item.quantity >= 50 ? 'disabled' : ''}>+</button>
+                    </div>
+                    
+                    <span class="cart-item-price">${item.product.price * item.quantity} ر.س</span>
+                    
+                    <button class="btn-delete-item" data-id="${item.product.id}">
+                        <i class="bi bi-trash-fill"></i>
+                    </button>
                 </div>
             `;
             cartModalBody.innerHTML += itemHTML;
-            
-            // 4. حساب الإجمالي
-            total += item.price;
+            total += item.product.price * item.quantity;
         });
 
-        // 5. تحديث الإجمالي
         cartTotalPrice.innerText = total + ' ر.س';
     }
 
-    // --- (جديد) الخطوة 9: تفعيل الضغط على أيقونة السلة ---
+    // --- الخطوة 9: تفعيل الضغط على أيقونة السلة (كما هي) ---
     cartIcon.addEventListener('click', () => {
-        // 1. حدث بيانات النافذة
-        updateCartModal();
-        // 2. أظهر النافذة
-        cartModal.show();
+        updateCartModal(); // حدث البيانات
+        cartModal.show();  // أظهر النافذة
     });
 
-    // --- الخطوة 10: تفعيل التمرير الناعم (كما هي) ---
+    // --- (جديد) الخطوة 10: تفعيل أزرار الحذف والكمية داخل السلة ---
+    cartModalBody.addEventListener('click', (e) => {
+        const target = e.target;
+        
+        // إذا ضغطت "حذف"
+        if (target.closest('.btn-delete-item')) {
+            const button = target.closest('.btn-delete-item');
+            const productId = button.dataset.id;
+            
+            // حذف المنتج من مصفوفة السلة
+            cartItems = cartItems.filter(item => item.product.id != productId);
+            
+            updateCartModal();    // حدث عرض السلة
+            updateCartCounter();  // حدث العداد
+            refreshAllProducts(); // حدث الصفحة الرئيسية لإعادة تفعيل الزر
+        }
+
+        // إذا ضغطت "كمية" (+ أو -)
+        if (target.closest('.btn-quantity')) {
+            const button = target.closest('.btn-quantity');
+            const productId = button.dataset.id;
+            const action = button.dataset.action;
+            
+            const item = cartItems.find(item => item.product.id == productId);
+
+            if (item) {
+                if (action === 'increase' && item.quantity < 50) {
+                    item.quantity++;
+                } else if (action === 'decrease') {
+                    item.quantity--;
+                    if (item.quantity === 0) {
+                        // إذا وصلت الكمية 0، احذفه
+                        cartItems = cartItems.filter(i => i.product.id != productId);
+                    }
+                }
+            }
+            
+            updateCartModal();    // حدث عرض السلة
+            updateCartCounter();  // حدث العداد
+            refreshAllProducts(); // حدث الصفحة الرئيسية لتحديث الأزرار
+        }
+    });
+    
+    // --- (جديد) الخطوة 11: تفعيل زر "الانتقال للدفع" ---
+    checkoutButton.addEventListener('click', () => {
+        if (cartItems.length === 0) {
+            alert('سلتك فارغة! أضف بعض المنتجات أولاً.');
+        } else {
+            // (كمشروع واجهة أمامية، سنكتفي بإظهار رسالة)
+            alert('شكراً لطلبك! سيتم نقلك لصفحة الدفع .');
+            // (هنا يمكنك إخفاء النافذة وإعادة تعيين السلة)
+            cartModal.hide();
+            cartItems = [];
+            updateCartModal();
+            updateCartCounter();
+            refreshAllProducts();
+        }
+    });
+
+    // --- الخطوة 12: تفعيل التمرير الناعم (كما هي) ---
     document.querySelectorAll('.navbar a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault(); 

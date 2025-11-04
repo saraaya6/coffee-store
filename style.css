@@ -291,7 +291,7 @@ footer p {
 /* --- تنسيق نافذة السلة (Modal) --- */
 .modal-content {
     background-color: #3E2723; /* خلفية بنية داكنة (نفس الصفحة) */
-    color: #E0E0E0; /* خط بيج فاتح */
+    color: #3E2723; /* خط بيج فاتح */
     border: 1px solid #5D4037;
     border-radius: 15px;
 }
@@ -301,7 +301,7 @@ footer p {
 }
 
 .modal-header h5 {
-    color: #fff;
+    color: #5D4037;
     font-weight: bold;
 }
 
@@ -323,7 +323,7 @@ footer p {
 }
 
 .modal-footer h5 {
-    color: #fff;
+    color: #5D4037;
     margin-bottom: 0;
 }
 
@@ -338,7 +338,8 @@ footer p {
     border-color: #A1887F;
 }
 
-/* --- تنسيق المنتجات داخل السلة --- */
+
+/* --- تنسيق المنتجات داخل السلة (مُحدّث) --- */
 .cart-item {
     display: flex;
     align-items: center;
@@ -351,22 +352,63 @@ footer p {
     height: 80px;
     object-fit: cover;
     border-radius: 10px;
-    margin-left: 15px; /* (هامش لليسار لأننا rtl) */
+    margin-left: 15px; 
 }
 .cart-item-details {
     flex-grow: 1;
 }
 .cart-item-details h6 {
-    color: #5D4037;
+    color: #762020; /* <-- تم التصحيح إلى الأبيض */
     font-weight: bold;
     margin-bottom: 5px;
 }
 .cart-item-details p {
     margin-bottom: 0;
-    color: #6a5650;
+    color: #bb836a; /* <-- تم التصحيح إلى البيج */
 }
 .cart-item-price {
     font-weight: bold;
     font-size: 1.1rem;
-    color: #5D4037;
+    color: #bb836a; /* <-- تم التصحيح إلى الأبيض */
+    margin-left: 20px;
+}
+
+/* --- (جديد) تنسيق أزرار الكمية --- */
+.cart-quantity-controls {
+    display: flex;
+    align-items: center;
+    background: #5D4037;
+    border-radius: 8px;
+    margin-left: 20px;
+}
+.cart-quantity-controls button {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0 10px;
+    cursor: pointer;
+}
+.cart-quantity-controls span {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+}
+.cart-quantity-controls button:disabled {
+    color: #8D6E63;
+    cursor: not-allowed;
+}
+
+/* --- (جديد) تنسيق زر الحذف --- */
+.btn-delete-item {
+    background: transparent;
+    border: none;
+    color: #A1887F; /* بني فاتح */
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+.btn-delete-item:hover {
+    color: #bb836a; /* لون كريمي */
 }
