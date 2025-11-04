@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // الخطوة 1: تعريف "قاعدة البيانات الوهمية" للمنتجات (مع تصحيح IDs)
+    // الخطوة 1: تعريف "قاعدة البيانات الوهمية" للمنتجات (مع إضافة الأكواب والمحاصيل)
     const products = [
         {
             id: 1,
@@ -71,15 +71,96 @@ document.addEventListener('DOMContentLoaded', () => {
             category: 'قهوة',
             price: 18,
             image: 'images/iced-latte.png'
+        },
+        // --- المنتجات الجديدة: أكواب ---
+        {
+            id: 11,
+            name: 'كوب كتب',
+            category: 'أكواب',
+            price: 35,
+            image: 'images/books-cup.png'
+        },
+        {
+            id: 12,
+            name: 'كوب فن',
+            category: 'أكواب',
+            price: 35,
+            image: 'images/art-cup.png'
+        },
+        {
+            id: 13,
+            name: 'كوب صحراء',
+            category: 'أكواب',
+            price: 35,
+            image: 'images/desert-cup.png'
+        },
+        {
+            id: 14,
+            name: 'كوب القهوة',
+            category: 'أكواب',
+            price: 30,
+            image: 'images/logo-cup.png'
+        },
+        {
+            id: 15,
+            name: 'كوب مكتب',
+            category: 'أكواب',
+            price: 35,
+            image: 'images/office-cup.png'
+        },
+        {
+            id: 16,
+            name: 'كوب مغامرة',
+            category: 'أكواب',
+            price: 35,
+            image: 'images/adv-cup.png'
+        },
+        // --- المنتجات الجديدة: محاصيل ---
+        {
+            id: 17,
+            name: 'محصول يمني يافعي',
+            category: 'محاصيل',
+            price: 75,
+            image: 'images/Coffee-Beans.png' // (استخدمت الصور المتاحة كمثال)
+        },
+        {
+            id: 18,
+            name: 'محصول اثيوبي',
+            category: 'محاصيل',
+            price: 55,
+            image: 'images/‏‏Coffee-Beans2.png' // (استخدمت الصور المتاحة كمثال)
+        },
+        {
+            id: 19,
+            name: 'محصول برازيلي',
+            category: 'محاصيل',
+            price: 65,
+            image: 'images/‏‏Coffee-Beans3.png' // (استخدمت الصور المتاحة كمثال)
+        },
+        {
+            id: 20,
+            name: 'محصول كولومبي',
+            category: 'محاصيل',
+            price: 45,
+            image: 'images/‏‏Coffee-Beans4.png' // (استخدمت الصور المتاحة كمثال)
+        },
+        {
+            id: 20,
+            name: 'محصول اوغندي',
+            category: 'محاصيل',
+            price: 45,
+            image: 'images/‏‏Coffee-Beans5.png' // (استخدمت الصور المتاحة كمثال)
         }
-        
     ];
 
-    // الخطوة 2: الإمساك بالحاويات
+    // الخطوة 2: الإمساك بالحاويات (مع إضافة الحاويات الجديدة)
     const coffeeContainer = document.getElementById('coffee-carousel-container');
     const sweetsContainer = document.getElementById('sweets-carousel-container');
+    const cupsContainer = document.getElementById('cups-carousel-container'); // (جديد)
+    const beansContainer = document.getElementById('beans-carousel-container'); // (جديد)
 
-    // الخطوة 3: دالة لإنشاء وعرض المنتجات (مع أيقونة سلة أنيقة)
+
+    // الخطوة 3: دالة لإنشاء وعرض المنتجات (لا تحتاج تعديل)
     function displayProducts(productsList, container) {
         if (!container) return;
         container.innerHTML = ''; 
@@ -101,15 +182,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // الخطوة 4: فلترة البيانات وتوزيعها
+    // الخطوة 4: فلترة البيانات وتوزيعها (مع إضافة الفلاتر الجديدة)
     const coffeeProducts = products.filter(product => product.category === 'قهوة');
     const sweetProducts = products.filter(product => product.category === 'حلويات');
+    const cupProducts = products.filter(product => product.category === 'أكواب'); // (جديد)
+    const beanProducts = products.filter(product => product.category === 'محاصيل'); // (جديد)
 
-    // الخطوة 5: تشغيل الدالة لكل قسم
+    // الخطوة 5: تشغيل الدالة لكل قسم (مع إضافة الأقسام الجديدة)
     displayProducts(coffeeProducts, coffeeContainer);
     displayProducts(sweetProducts, sweetsContainer);
+    displayProducts(cupProducts, cupsContainer); // (جديد)
+    displayProducts(beanProducts, beansContainer); // (جديد)
 
     // --- الخطوة 6: تفعيل السحب بالماوس (Drag-to-Scroll) ---
+    // (الكود يعمل كما هو لجميع الأقسام الجديدة)
     const sliders = document.querySelectorAll('.product-carousel');
     sliders.forEach(slider => {
         let isDown = false;
@@ -143,26 +229,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- الخطوة 7: تفعيل سلة المشتريات (بالتصميم الجديد) ---
+    // (الكود يعمل كما هو لجميع الأزرار الجديدة)
     let cartCount = 0;
     const cartCounterElement = document.getElementById('cart-counter');
-    // (يجب أن ننتظر حتى يتم إنشاء الأزرار ثم نربطها)
-    // نستخدم "Event Delegation" لضمان عمل الأزرار التي تم إنشاؤها
     document.body.addEventListener('click', function(e) {
-        // ابحث عن أقرب زر تم الضغط عليه
         const button = e.target.closest('.add-to-cart-btn');
-
-        // تأكد أنه زر سلة وليس زر معطل
         if (button && !button.disabled) {
             cartCount++;
             cartCounterElement.innerText = cartCount;
-
-            // تغيير الزر بعد الضغط
             button.innerHTML = '<span><i class="bi bi-check-lg"></i> تمت الإضافة</span>';
-            button.disabled = true; // تعطيل الزر (ليأخذ تنسيق CSS)
+            button.disabled = true; 
         }
     });
 
     // --- الخطوة 8: تفعيل التمرير الناعم (Smooth Scroll) ---
+    // (الكود يعمل كما هو للروابط الجديدة)
     document.querySelectorAll('.navbar a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault(); 
