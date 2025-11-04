@@ -94,7 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
             price: 35,
             image: 'images/desert-cup.png'
         },
-        {
+        
+        { 
             id: 14,
             name: 'كوب القهوة',
             category: 'أكواب',
