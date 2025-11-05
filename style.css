@@ -328,15 +328,18 @@ footer p {
     margin-bottom: 0;
 }
 
-/* زر إتمام الطلب */
+/* زر إتمام الطلب (مُعدّل ليتجاوز البوتستراب) */
 .btn-checkout {
-    background-color: #795548; /* لون بني (نفس لون الأزرار) */
-    border-color: #795548;
+    background-color: #795548 !important; /* (أضفنا !important لضمان الفوز) */
+    border-color: #795548 !important;     /* (أضفنا !important) */
     font-weight: bold;
+    color: white !important;              /* (أضفنا اللون و !important) */
 }
+
 .btn-checkout:hover {
-    background-color: #A1887F;
-    border-color: #A1887F;
+    background-color: #8a675a !important; /* (للتأكد من عمل الهوفر أيضاً) */
+    border-color: #8a675a !important;
+    color: white !important;
 }
 
 
@@ -530,4 +533,88 @@ footer p {
 }
 .toast-body {
     font-weight: bold;
+}
+
+
+/* --- (جديد) تنسيق الصفحات الثابتة (تواصل معنا والسياسة) --- */
+.static-page-container {
+    color: #795548; /* (لون بيج فاتح للنصوص) */
+    line-height: 1.7;
+}
+
+.static-page-container h2 {
+    color: #5D4037; /* (لون بني للعنوان الرئيسي) */
+}
+
+.static-page-container h5 {
+    color: #5D4037; /* (أبيض للعناوين الفرعية) */
+    font-weight: bold;
+}
+
+/* (تنسيق حقول الإدخال في صفحة "تواصل معنا") */
+.form-control-dark {
+    background-color: #5D4037; /* (بني أغمق) */
+    border: 1px solid #795548;
+    color: #795548;
+    border-radius: 8px;
+}
+
+.form-control-dark:focus {
+    background-color: #5D4037;
+    border-color: #A1887F;
+    color: #795548;
+    box-shadow: none;
+}
+
+.form-control-dark::placeholder {
+    color: #A1887F;
+}
+
+.form-label {
+    color: #795548;
+    font-weight: bold;
+}
+
+
+/* --- (جديد) تنسيق نافذة الفاتورة (الإيصال) --- */
+#receiptModal .modal-content {
+    background-color: #3E2723; /* خلفية بنية داكنة (نفس السلة) */
+    color: #E0E0E0;
+    border: 1px solid #5D4037;
+    border-radius: 15px;
+}
+
+#receiptModal .modal-header h5 {
+    color: #fff;
+}
+
+/* تنسيق قائمة المنتجات في الفاتورة */
+.receipt-list {
+    list-style: none;
+    padding: 0;
+}
+.receipt-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dashed #5D4037; /* (خط متقطع كالفاتورة) */
+}
+.receipt-item span {
+    color: #E0E0E0;
+}
+
+/* تنسيق إجمالي الفاتورة */
+.receipt-total {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    padding-top: 15px;
+}
+.receipt-total strong {
+    color: #fff;
+    font-size: 1.2rem;
+}
+.receipt-total .receipt-final-price {
+    color: #fff;
+    font-size: 1.4rem;
 }

@@ -150,6 +150,13 @@ const products = [
   },
 ];
 
+
+const checkoutButton = document.querySelector('.btn-checkout');
+// --- أضيفي السطرين التاليين ---
+const receiptModal = new bootstrap.Modal(document.getElementById('receiptModal'));
+const receiptModalBody = document.getElementById('receipt-modal-body');
+
+
 function getCartFromStorage() {
   const cart = localStorage.getItem("coffeeStoreCart");
   return cart ? JSON.parse(cart) : [];
@@ -364,19 +371,47 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  checkoutButton.addEventListener("click", () => {
+  // (جديد) تفعيل زر "الانتقال للدفع" لإظهار الفاتورة
+checkoutButton.addEventListener('click', () => {
     if (cartItems.length === 0) {
-      alert("سلتك فارغة! أضف بعض المنتجات أولاً.");
+        alert('سلتك فارغة! أضف بعض المنتجات أولاً.');
     } else {
-      alert("شكراً لطلبك! سيتم نقلك لصفحة الدفع (وهمية).");
-      cartModal.hide();
-      cartItems = [];
-      updateCartModal();
-      updateCartCounter();
-      refreshAllProducts();
-      saveCartToStorage(cartItems);
+        // 1. بناء الفاتورة (قبل مسح السلة)
+        let receiptHTML = '<h5>تفاصيل الفاتورة:</h5>';
+        let finalTotal = 0;
+        receiptHTML += '<ul class="list-unstyled receipt-list">';
+        cartItems.forEach(item => {
+            const itemTotal = item.product.price * item.quantity;
+            receiptHTML += `<li class="receipt-item">
+                                <span>(${item.quantity}x) ${item.product.name}</span>
+                                <span class="fw-bold">${itemTotal} ر.س</span>
+                             </li>`;
+            finalTotal += itemTotal;
+        });
+        receiptHTML += '</ul>';
+        receiptHTML += `<hr class="footer-hr">
+                        <div class="receipt-total">
+                            <strong>الإجمالي:</strong>
+                            <strong class="receipt-final-price">${finalTotal} ر.س</strong>
+                        </div>`;
+
+        // 2. وضع الفاتورة في النافذة الجديدة
+        receiptModalBody.innerHTML = receiptHTML;
+
+        // 3. إخفاء نافذة السلة
+        cartModal.hide();
+
+        // 4. إظهار نافذة الفاتورة
+        receiptModal.show();
+
+        // 5. مسح السلة الآن
+        cartItems = [];
+        updateCartModal();
+        updateCartCounter();
+        refreshAllProducts(); // (لتحديث أزرار الصفحة الرئيسية)
+        saveCartToStorage(cartItems);
     }
-  });
+});;
 
   document
     .querySelectorAll('.navbar a[href^="index.html#"]')
