@@ -6,7 +6,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <title>القهوة</title>
+    <title>القهوة - عرض المنتجات</title>
 </head>
 
 <body dir="rtl">
@@ -14,7 +14,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark main-navbar sticky-top">
         <div class="container">
             
-            <a class="navbar-brand" href="#home-hero">
+            <a class="navbar-brand" href="index.html#home-hero">
                 <img src="images/logo.jpg" alt="شعار متجر القهوة" class="navbar-logo">
             </a>
     
@@ -26,19 +26,19 @@
                 
                 <ul class="navbar-nav ms-auto"> 
                     <li class="nav-item">
-                        <a class="nav-link active" href="#home-hero">الرئيسية</a>
+                        <a class="nav-link" href="index.html">الرئيسية</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#coffee-section">قهوة</a>
+                        <a class="nav-link" href="index.html#coffee-section">قهوة</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#sweets-section">حلويات صحية</a>
+                        <a class="nav-link" href="index.html#sweets-section">حلويات صحية</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#cups-section">أكواب قهوة</a>
+                        <a class="nav-link" href="index.html#cups-section">أكواب قهوة</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#beans-section">محاصيل قهوة</a>
+                        <a class="nav-link" href="index.html#beans-section">محاصيل قهوة</a>
                     </li>
                 </ul>
                 
@@ -51,51 +51,17 @@
     
         </div>
     </nav>
-    <div class="container-fluid-hero-section" id="home-hero">
-        <div class="hero-content text-center">
-            <h1 class="display-4 fw-bold text-white"> مرحبا بك في القهوة</h1>
-            <p class="fs-4 text-white">قهوتك وحلاك الصحي بضغطة زر</p>
-            <a href="#products" class="btn-custom">منتجاتنا </a>
-        </div>
-    </div>
-
+    
     <div class="container mt-5" id="products">
 
-        <div class="carousel-section" id="coffee-section">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h3 class="fw-bold"> القهوة</h3>
-                <a href="products.html?category=قهوة" class="view-all-link">عرض الكل &larr;</a>
+        <div class="row mb-4">
+            <div class="col">
+                <h2 class="display-5 fw-bold" id="category-title" style="color: #795548;">عرض المنتجات</h2>
             </div>
-            <div class="product-carousel" id="coffee-carousel-container">
-                </div> 
         </div>
-
-        <div class="carousel-section" id="sweets-section">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h3 class="fw-bold"> الحلويات الصحية</h3>
-                <a href="products.html?category=حلويات" class="view-all-link">عرض الكل &larr;</a>
+        
+        <div class="row" id="product-grid-container">
             </div>
-            <div class="product-carousel" id="sweets-carousel-container">
-                </div>
-        </div>
-
-        <div class="carousel-section" id="cups-section">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h3 class="fw-bold"> أكواب قهوة</h3>
-                <a href="products.html?category=أكواب" class="view-all-link">عرض الكل &larr;</a>
-            </div>
-            <div class="product-carousel" id="cups-carousel-container">
-                </div>
-        </div>
-
-        <div class="carousel-section" id="beans-section">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h3 class="fw-bold"> محاصيل قهوة</h3>
-                <a href="products.html?category=محاصيل" class="view-all-link">عرض الكل &larr;</a>
-            </div>
-            <div class="product-carousel" id="beans-carousel-container">
-                </div>
-        </div>
 
     </div>
 
@@ -111,7 +77,7 @@
                 <div class="col-md-4 mb-3">
                     <h5>روابط سريعة</h5>
                     <ul class="list-unstyled footer-links">
-                        <li><a href="#home-hero">الرئيسية</a></li>
+                        <li><a href="index.html#home-hero">الرئيسية</a></li>
                         <li><a href="#">سياسة الخصوصية</a></li>
                         <li><a href="#">الشروط والأحكام</a></li>
                         <li><a href="#">تواصل معنا</a></li>
@@ -136,36 +102,35 @@
     </footer>
 
     <div class="modal fade" id="cartModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="cartModalLabel">
-                    <i class="bi bi-cart-fill"></i> سلة مشترياتك
-                </h5>
-                <button type="button" class="btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <div class="modal-body" id="cart-modal-body">
-                <p>سلتك فارغة حالياً.</p>
-            </div>
-
-            <div class="modal-footer">
-                <div>
-                    <h5>الإجمالي: <span id="cart-total-price">0 ر.س</span></h5>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cartModalLabel">
+                        <i class="bi bi-cart-fill"></i> سلة مشترياتك
+                    </h5>
+                    <button type="button" class="btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-                    <button type="button" class="btn btn-primary btn-checkout">الانتقال للدفع</button>
+                <div class="modal-body" id="cart-modal-body">
+                    <p>سلتك فارغة حالياً.</p>
+                </div>
+                <div class="modal-footer">
+                    <div>
+                        <h5>الإجمالي: <span id="cart-total-price">0 ر.س</span></h5>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                        <button type="button" class="btn btn-primary btn-checkout">الانتقال للدفع</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-    <script src="app.js" ></script>    
+    
+    <script src="products.js" ></script>    
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-// (هذا هو الكود الكامل والجديد لملف app.js)
+// (هذا هو الكود الكامل لملف products.js)
 
 // الخطوة 1: مصفوفة المنتجات (نحتاجها في كل صفحة)
 const products = [
@@ -144,7 +144,7 @@ const products = [
         image: 'images/‏‏Coffee-Beans4.png'
     },
     {
-        id: 21, // (تصحيح ID 20 المكرر)
+        id: 21,
         name: 'محصول اوغندي',
         category: 'محاصيل',
         price: 45,
@@ -152,36 +152,55 @@ const products = [
     }
 ];
 
-// --- (جديد) دوال الـ localStorage لجعل السلة مشتركة ---
+// --- (جديد) سنقوم بتعريف السلة هنا (خارج الدوم) لنحفظها
+// (هذه هي الخطوة الأولى لجعل السلة "مشتركة")
+// سنستخدم "localStorage" ليحفظ المتصفح السلة حتى لو أغلق المستخدم الصفحة
 function getCartFromStorage() {
     const cart = localStorage.getItem('coffeeStoreCart');
-    // إذا وجدنا سلة محفوظة، نرجعها، وإلا نرجع مصفوفة فارغة
     return cart ? JSON.parse(cart) : [];
 }
 
 function saveCartToStorage(cart) {
-    // نخزن السلة في المتصفح كـ "نص"
     localStorage.setItem('coffeeStoreCart', JSON.stringify(cart));
 }
 
-// --- (ترقية) الآن السلة تقرأ من الذاكرة المحفوظة ---
 let cartItems = getCartFromStorage();
 
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // === الكود الخاص بالصفحة الرئيسية (index.html) ===
-    
-    // الخطوة 2: الإمساك بالحاويات
-    const coffeeContainer = document.getElementById('coffee-carousel-container');
-    const sweetsContainer = document.getElementById('sweets-carousel-container');
-    const cupsContainer = document.getElementById('cups-carousel-container'); 
-    const beansContainer = document.getElementById('beans-carousel-container'); 
+    // === الكود الخاص بصفحة المنتجات (products.html) ===
+    const titleElement = document.getElementById('category-title');
+    const gridContainer = document.getElementById('product-grid-container');
 
-    // الخطوة 3: دالة لإنشاء وعرض المنتجات (الكاروسيل)
-    function displayProducts(productsList, container) {
-        if (!container) return; // (نتأكد أن الحاوية موجودة)
-        container.innerHTML = ''; 
+    // 1. قراءة "معيار الرابط" من الـ URL
+    const params = new URLSearchParams(window.location.search);
+    const category = params.get('category'); 
+
+    // 2. تحديث العنوان بناءً على ما جاء في الرابط
+    if (category) {
+        titleElement.innerText = ` ${category}`;
+    } else {
+        titleElement.innerText = 'كل المنتجات';
+    }
+
+    // 3. فلترة المنتجات
+    let productsToShow = [];
+    if (category) {
+        productsToShow = products.filter(p => p.category === category);
+    } else {
+        productsToShow = products; // اعرض الكل
+    }
+
+    // 4. دالة لعرض المنتجات (هذه المرة كشبكة)
+    function displayProductsInGrid(productsList) {
+        if (!gridContainer) return; // تأكد أننا في الصفحة الصحيحة
+        
+        gridContainer.innerHTML = '';
+        if (productsList.length === 0) {
+            gridContainer.innerHTML = '<p class="text-white">لا توجد منتجات في هذا القسم حالياً.</p>';
+            return;
+        }
 
         productsList.forEach(product => {
             // (جديد) التحقق من السلة لتحديث الأزرار
@@ -189,6 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const isDisabled = itemInCart && itemInCart.quantity >= 10;
             
             const productCardHTML = `
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                 <div class="product-card">
                     <img src="${product.image}" class="card-img-top" alt="${product.name}">
                     <div class="card-body">
@@ -199,47 +219,18 @@ document.addEventListener('DOMContentLoaded', () => {
                         </button>
                     </div> 
                 </div>
+            </div>
             `;
-            container.innerHTML += productCardHTML;
+            gridContainer.innerHTML += productCardHTML;
         });
     }
 
-    // (جديد) دالة لإعادة رسم جميع أقسام الكاروسيل
-    function refreshAllProducts() {
-        displayProducts(coffeeProducts, coffeeContainer);
-        displayProducts(sweetProducts, sweetsContainer);
-        displayProducts(cupProducts, cupsContainer);
-        displayProducts(beanProducts, beansContainer);
-    }
+    // 5. تشغيل العرض
+    displayProductsInGrid(productsToShow);
 
-    // الخطوة 4: فلترة البيانات
-    const coffeeProducts = products.filter(product => product.category === 'قهوة');
-    const sweetProducts = products.filter(product => product.category === 'حلويات');
-    const cupProducts = products.filter(product => product.category === 'أكواب');
-    const beanProducts = products.filter(product => product.category === 'محاصيل');
 
-    // الخطوة 5: تشغيل العرض
-    refreshAllProducts();
-
-    // الخطوة 6: تفعيل السحب بالماوس (كما هو)
-    const sliders = document.querySelectorAll('.product-carousel');
-    sliders.forEach(slider => {
-        let isDown = false, startX, scrollLeft;
-        slider.addEventListener('mousedown', (e) => {
-            isDown = true; slider.classList.add('active-drag');
-            startX = e.pageX - slider.offsetLeft; scrollLeft = slider.scrollLeft;
-        });
-        slider.addEventListener('mouseup', () => { isDown = false; slider.classList.remove('active-drag'); });
-        slider.addEventListener('mouseleave', () => { isDown = false; slider.classList.remove('active-drag'); });
-        slider.addEventListener('mousemove', (e) => {
-            if (!isDown) return; e.preventDefault();
-            const x = e.pageX - slider.offsetLeft; const walk = (x - startX) * 2; 
-            slider.scrollLeft = scrollLeft - walk;
-        });
-    });
-
-    
-    // === (جديد) الكود المشترك (الآن أصبح في app.js أيضاً) ===
+    // === (جديد) الكود المشترك (الذي كان في app.js) ===
+    // (هذا الكود سيعمل الآن في products.html)
 
     const cartCounterElement = document.getElementById('cart-counter');
     const cartIcon = document.querySelector('.cart-icon-container');
@@ -248,16 +239,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
     const checkoutButton = document.querySelector('.btn-checkout');
 
-    // دالة لتحديث عداد السلة الإجمالي
+    // (جديد) دالة لإعادة رسم جميع المنتجات (لتحديث الأزرار المعطلة)
+    function refreshAllProducts() {
+        // (بما أننا في صفحة المنتجات، نكتفي بتحديث الشبكة)
+        displayProductsInGrid(productsToShow);
+    }
+
+    // (جديد) دالة لتحديث عداد السلة الإجمالي
     function updateCartCounter() {
         const totalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
         cartCounterElement.innerText = totalCount;
     }
 
-    // دالة لفتح وتحديث النافذة المنبثقة
+    // (جديد) دالة لفتح وتحديث النافذة المنبثقة
     function updateCartModal() {
-        if (!cartModalBody) return; // (تأكد أن النافذة موجودة)
-        
         cartModalBody.innerHTML = '';
         
         if (cartItems.length === 0) {
@@ -293,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cartTotalPrice.innerText = total + ' ر.س';
     }
 
-    // تفعيل سلة المشتريات (لتدعم الكميات)
+    // (جديد) تفعيل سلة المشتريات (لتدعم الكميات)
     document.body.addEventListener('click', function(e) {
         const button = e.target.closest('.add-to-cart-btn');
         if (button && !button.disabled) {
@@ -318,11 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const originalText = button.innerHTML;
                 button.innerHTML = '<span><i class="bi bi-check-lg"></i> أضيف +1</span>';
                 setTimeout(() => {
-                    // (إعادة الزر لوضعه الأصلي فقط إذا لم يصل للحد الأقصى)
-                    const item = cartItems.find(item => item.product.id == productId);
-                    if (!item || item.quantity < 10) {
-                        button.innerHTML = originalText;
-                    }
+                    button.innerHTML = originalText;
                 }, 1000); 
             }
             
@@ -331,13 +322,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // تفعيل الضغط على أيقونة السلة
+    // (جديد) تفعيل الضغط على أيقونة السلة
     cartIcon.addEventListener('click', () => {
         updateCartModal(); 
         cartModal.show();  
     });
 
-    // تفعيل أزرار الحذف والكمية داخل السلة
+    // (جديد) تفعيل أزرار الحذف والكمية داخل السلة
     cartModalBody.addEventListener('click', (e) => {
         const target = e.target;
         
@@ -348,7 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             updateCartModal();    
             updateCartCounter();  
-            refreshAllProducts(); // (لتحديث أزرار الصفحة الرئيسية)
+            refreshAllProducts(); 
             saveCartToStorage(cartItems); // (جديد) حفظ السلة
         }
 
@@ -376,7 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    // تفعيل زر "الانتقال للدفع"
+    // (جديد) تفعيل زر "الانتقال للدفع"
     checkoutButton.addEventListener('click', () => {
         if (cartItems.length === 0) {
             alert('سلتك فارغة! أضف بعض المنتجات أولاً.');
@@ -391,19 +382,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    // تفعيل التمرير الناعم (Smooth Scroll)
-    document.querySelectorAll('.navbar a[href^="#"]').forEach(anchor => {
+    // (جديد) تفعيل التمرير الناعم للروابط التي تشير لـ index.html
+    document.querySelectorAll('.navbar a[href^="index.html#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault(); 
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-
-            if (targetElement) {
-                targetElement.scrollIntoView({ behavior: 'smooth' });
-            }
+            const href = this.getAttribute('href');
+            // (بما أننا في صفحة مختلفة، ننتقل للرابط)
+            window.location.href = href;
         });
     });
 
-    // (جديد) تحديث العداد عند تحميل الصفحة (لقراءة السلة المحفوظة)
+    // (جديد) تحديث العداد عند تحميل الصفحة
     updateCartCounter();
 });
