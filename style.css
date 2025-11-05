@@ -510,3 +510,24 @@ footer p {
     cursor: not-allowed;
     opacity: 0.9;
 }
+
+
+/* --- تنسيق إشعار الإضافة للسلة (Toast) --- */
+.toast {
+    background-color: #2D1E1A; /* لون بني داكن جداً (نفس الفوتر) */
+    color: #3E2723;
+    border: 1px solid #5D4037;
+    border-radius: 10px;
+}
+.toast-header {
+    background-color: #3E2723; /* لون الخلفية الرئيسي */
+    color: #3E2723;
+    border-bottom: 1px solid #5D4037;
+}
+.toast-header .btn-close {
+    /* (لجعل زر الإغلاق أبيض) */
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+.toast-body {
+    font-weight: bold;
+}
