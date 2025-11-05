@@ -188,11 +188,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const itemInCart = cartItems.find(item => item.product.id == product.id);
             const isDisabled = itemInCart && itemInCart.quantity >= 10;
             
+            // (هذا داخل دالة displayProducts في app.js)
+            // (هذا داخل دالة displayProducts في app.js)
+
             const productCardHTML = `
                 <div class="product-card">
                     <img src="${product.image}" class="card-img-top" alt="${product.name}">
+
                     <div class="card-body">
-                        <h5 class="product-name">${product.name}</h5>
+                        <a href="product-detail.html?id=${product.id}" class="product-link">
+                            <h5 class="product-name">${product.name}</h5>
+                        </a>
                         <p class="product-price">${product.price} ر.س</p>
                         <button class="add-to-cart-btn" data-product-id="${product.id}" ${isDisabled ? 'disabled' : ''}>
                             ${isDisabled ? '<span><i class="bi bi-check-lg"></i> تمت الإضافة</span>' : '<span><i class="bi bi-bag"></i> أضف إلى السلة</span>'}

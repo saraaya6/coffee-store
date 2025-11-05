@@ -1,0 +1,109 @@
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>القهوة - تفاصيل المنتج</title>
+</head>
+
+<body dir="rtl">
+
+    <nav class="navbar navbar-expand-lg navbar-dark main-navbar sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html#home-hero">
+                <img src="images/logo.jpg" alt="شعار متجر القهوة" class="navbar-logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto"> 
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">الرئيسية</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#coffee-section">قهوة</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#sweets-section">حلويات صحية</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#cups-section">أكواب قهوة</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#beans-section">محاصيل قهوة</a>
+                    </li>
+                </ul>
+                <div class="cart-icon-container ms-3">
+                    <i class="bi bi-cart-fill"></i>
+                    <span class="cart-counter" id="cart-counter">0</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5" id="product-detail-container">
+        </div>
+
+    <footer class="bg-dark text-light p-4 mt-5">
+        <div class="container">
+            <div class="row text-center text-md-end">
+                <div class="col-md-4 mb-3">
+                    <h5>عن متجر القهوة</h5>
+                    <p class="footer-text">متجر متخصص بتقديم أجود أنواع القهوة والحلويات الصحية، محضرة بحب وشغف.</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5>روابط سريعة</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="index.html#home-hero">الرئيسية</a></li>
+                        <li><a href="#">سياسة الخصوصية</a></li>
+                        <li><a href="#">الشروط والأحكام</a></li>
+                        <li><a href="#">تواصل معنا</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5>تابعنا</h5>
+                    <div class="social-icons">
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#"><i class="bi bi-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-hr">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 القهوة. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="cartModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cartModalLabel"><i class="bi bi-cart-fill"></i> سلة مشترياتك</h5>
+                    <button type="button" class="btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="cart-modal-body"><p>سلتك فارغة حالياً.</p></div>
+                <div class="modal-footer">
+                    <div><h5>الإجمالي: <span id="cart-total-price">0 ر.س</span></h5></div>
+                    <div>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                        <button type="button" class="btn btn-primary btn-checkout">الانتقال للدفع</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <script src="product-detail.js" ></script>    
+
+</body>
+</html>

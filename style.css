@@ -33,6 +33,7 @@ body {
 
 /* --- تصميم كرت المنتج الاحترافي --- */
 .product-card {
+  position: relative;
   background-color: #ffffff; 
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -411,4 +412,101 @@ footer p {
 }
 .btn-delete-item:hover {
     color: #bb836a; /* لون كريمي */
+}
+/* --- تنسيق الرابط الممتد (Stretched Link) --- */
+.product-link {
+    text-decoration: none; /* إزالة الخط */
+}
+
+.product-link .product-name {
+    color: #4E342E; /* لون الاسم البني */
+}
+
+/* (عندما يغطي الرابط الكرت، نريد تغيير لون الاسم عند تمرير الماوس) */
+.product-card:hover .product-link .product-name {
+    color: #A1887F; 
+}
+
+/* (هذا هو السحر: نجعل الرابط يغطي الكرت بالكامل) */
+.product-link::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1; /* (نضعه فوق كل شيء) */
+}
+
+/* (نجعل الزر يطفو فوق الرابط الممتد) */
+.product-card .add-to-cart-btn {
+    position: relative;
+    z-index: 2; /* (أعلى من الرابط) */
+}
+
+
+/* --- تنسيق صفحة تفاصيل المنتج --- */
+.product-detail-image {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.product-detail-info {
+    color: #a18c85; /* لون بيج فاتح للنصوص */
+}
+
+.product-detail-title {
+    color: #5D4037; /* أبيض للعنوان الرئيسي */
+    font-weight: bold;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.product-detail-category {
+    font-size: 1rem;
+    color: #80665c; /* بني فاتح للفئة */
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.product-detail-price {
+    color: #A1887F;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.product-detail-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+/* (إعادة استخدام زر السلة ولكن بحجم أكبر) */
+.product-detail-info .add-to-cart-btn {
+    background: transparent;
+    color: #795548;
+    border: 2px solid #795548;
+    border-radius: 12px;
+    padding: 12px 30px; /* (بادينج أكبر) */
+    font-size: 1.2rem; /* (خط أكبر) */
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: none;
+}
+
+.product-detail-info .add-to-cart-btn:hover {
+    background: #795548; 
+    color: white;
+    transform: translateY(-2px); 
+}
+
+.product-detail-info .add-to-cart-btn:disabled {
+    background: #A1887F; 
+    border-color: #A1887F;
+    color: white;
+    cursor: not-allowed;
+    opacity: 0.9;
 }
