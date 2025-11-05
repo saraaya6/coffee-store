@@ -174,6 +174,12 @@ footer .footer-text {
 .footer-links a:hover {
     color: #A1887F;
 }
+
+
+.social-icons {
+    text-align: end;
+}  
+
 .social-icons a {
     color: #E0E0E0;
     font-size: 1.8rem;
@@ -588,7 +594,16 @@ footer p {
     color: #fff;
 }
 
-/* تنسيق قائمة المنتجات في الفاتورة */
+/* --- (جديد) تنسيق نافذة الفاتورة (الإيصال) --- */
+#receiptModal .modal-content {
+    background-color: #fff; 
+    color: #3E2723;
+    border: 1px solid #5D4037;
+    border-radius: 15px;
+}
+#receiptModal .modal-header h5 {
+    color: #3E2723;
+}
 .receipt-list {
     list-style: none;
     padding: 0;
@@ -597,13 +612,11 @@ footer p {
     display: flex;
     justify-content: space-between;
     padding: 10px 0;
-    border-bottom: 1px dashed #5D4037; /* (خط متقطع كالفاتورة) */
+    border-bottom: 1px dashed #A1887F; 
 }
 .receipt-item span {
-    color: #E0E0E0;
+    color: #3E2723;
 }
-
-/* تنسيق إجمالي الفاتورة */
 .receipt-total {
     display: flex;
     justify-content: space-between;
@@ -611,10 +624,10 @@ footer p {
     padding-top: 15px;
 }
 .receipt-total strong {
-    color: #fff;
+    color: #3E2723;
     font-size: 1.2rem;
 }
 .receipt-total .receipt-final-price {
-    color: #fff;
+    color: #3E2723;
     font-size: 1.4rem;
 }

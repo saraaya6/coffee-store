@@ -10,6 +10,7 @@
 </head>
 
 <body dir="rtl">
+
     <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100">
     </div>
 
@@ -103,7 +104,7 @@
 
     <footer class="bg-dark text-light p-4 mt-5">
         <div class="container">
-            <div class="row text-center text-md-end">
+            <div class="row text-end">
                 
                 <div class="col-md-4 mb-3">
                     <h5>عن متجر القهوة</h5>
@@ -113,9 +114,9 @@
                 <div class="col-md-4 mb-3">
                     <h5>روابط سريعة</h5>
                     <ul class="list-unstyled footer-links">
-                        <li><a href="index.html#home-hero">الرئيسية</a></li>
+                        <li><a href="#home-hero">الرئيسية</a></li>
                         <li><a href="policy.html">سياسة الخصوصية</a></li>
-                        <li><a href="terms.html">الشروط والأحكام</a></li>
+                        <li><a href="policy.html">الشروط والأحكام</a></li>
                         <li><a href="contact.html">تواصل معنا</a></li>
                     </ul>
                 </div>
@@ -138,52 +139,47 @@
     </footer>
 
     <div class="modal fade" id="cartModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="cartModalLabel">
-                    <i class="bi bi-cart-fill"></i> سلة مشترياتك
-                </h5>
-                <button type="button" class="btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <div class="modal-body" id="cart-modal-body">
-                <p>سلتك فارغة حالياً.</p>
-            </div>
-
-            <div class="modal-footer">
-                <div>
-                    <h5>الإجمالي: <span id="cart-total-price">0 ر.س</span></h5>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cartModalLabel">
+                        <i class="bi bi-cart-fill"></i> سلة مشترياتك
+                    </h5>
+                    <button type="button" class="btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-                    <button type="button" class="btn btn-primary btn-checkout">الانتقال للدفع</button>
+                <div class="modal-body" id="cart-modal-body">
+                    <p>سلتك فارغة حالياً.</p>
                 </div>
-            </div>
-
-            <div class="modal fade" id="receiptModal" tabindex="-1">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">
-                                <i class="bi bi-check-circle-fill" style="color: #A1887F;"></i> شكراً لطلبك!
-                            </h5>
-                            <button type="button" class="btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-
-                        <div class="modal-body" id="receipt-modal-body">
-                            </div>
-
-                        <div class="modal-footer justify-content-center">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-                        </div>
+                <div class="modal-footer">
+                    <div>
+                        <h5>الإجمالي: <span id="cart-total-price">0 ر.س</span></h5>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                        <button type="button" class="btn btn-primary btn-checkout">الانتقال للدفع</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
+    <div class="modal fade" id="receiptModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="bi bi-check-circle-fill" style="color: #A1887F;"></i> شكراً لطلبك!
+                    </h5>
+                    <button type="button" class="btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="receipt-modal-body">
+                    </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
