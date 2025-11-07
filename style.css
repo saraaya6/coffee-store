@@ -113,7 +113,7 @@ body {
 /* --- تصميم زر "منتجاتنا" في الهيرو --- */
 .btn-custom {
     text-decoration: none;
-    background: #7c5e53;
+    background: #5D4037;
     color: white;
     border: none;
     border-radius: 12px;
@@ -126,7 +126,7 @@ body {
 }
 
 .btn-custom:hover {
-    background: #A1887F;
+    background: #977264;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(78, 52, 46, 0.4);
     color: white;
