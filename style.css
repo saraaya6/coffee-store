@@ -132,31 +132,45 @@ body {
     color: white;
 }
 
-/* ======== تنسيق الهيرو سيكشن ======== */
+
+/* ======== تنسيق الهيرو سيكشن (مُعدل للفيديو) ======== */
 .container-fluid-hero-section {
     min-height: 80vh;
-    background-image: url('images/hero.png');
-    background-size: cover;
-    background-position: top center;
+    /* 1. تم حذف هذه الأسطر الخاصة بالصورة القديمة: */
+    /* background-image: url('images/hero.png'); */
+    /* background-size: cover; */
+    /* background-position: top center; <-- هذا ما كان يجعله "من فوق" */
+    
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
+    position: relative; /* 2. ضروري لتثبيت الفيديو بالداخل */
+    overflow: hidden; /* 3. لإخفاء أي زوائد من الفيديو */
 }
 
-.container-fluid-hero-section::before {
-    content: "";
+/* 4. (جديد) تنسيق الفيديو ليصبح خلفية ممطوطة بشكل صحيح */
+#hero-video {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(62, 39, 35, 0.4);
+    /* 5. هذا الكود يضمن التوسيط "من النص" تماماً */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 1; /* 6. وضعه خلف المحتوى */
+
+    /* 7. (الأهم) هذا يحل مشكلة "السحب والمط" */
+    /* سيقوم الفيديو بملء المساحة وقص الزوائد بدلاً من تغيير أبعاده */
+    object-fit: cover; 
 }
 
+/* 8. (تعديل) التأكد من أن المحتوى يطفو فوق الفيديو */
 .hero-content {
-    position: relative;
-    z-index: 2;
+    position: relative; /* (كان موجوداً مسبقاً) */
+    z-index: 2; /* 9. رفعه ليكون فوق الفيديو (z-index: 1) */
 }
 
 /* ======== تنسيق الفوتر (ذيل الصفحة) ======== */
