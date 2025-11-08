@@ -140,12 +140,14 @@ body {
     /* background-image: url('images/hero.png'); */
     /* background-size: cover; */
     /* background-position: top center; <-- هذا ما كان يجعله "من فوق" */
-    
+
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative; /* 2. ضروري لتثبيت الفيديو بالداخل */
-    overflow: hidden; /* 3. لإخفاء أي زوائد من الفيديو */
+    position: relative;
+    /* 2. ضروري لتثبيت الفيديو بالداخل */
+    overflow: hidden;
+    /* 3. لإخفاء أي زوائد من الفيديو */
 }
 
 /* 4. (جديد) تنسيق الفيديو ليصبح خلفية ممطوطة بشكل صحيح */
@@ -154,23 +156,26 @@ body {
     /* 5. هذا الكود يضمن التوسيط "من النص" تماماً */
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); 
-    
+    transform: translate(-50%, -50%);
+
     min-width: 100%;
     min-height: 100%;
     width: auto;
     height: auto;
-    z-index: 1; /* 6. وضعه خلف المحتوى */
+    z-index: 1;
+    /* 6. وضعه خلف المحتوى */
 
     /* 7. (الأهم) هذا يحل مشكلة "السحب والمط" */
     /* سيقوم الفيديو بملء المساحة وقص الزوائد بدلاً من تغيير أبعاده */
-    object-fit: cover; 
+    object-fit: cover;
 }
 
 /* 8. (تعديل) التأكد من أن المحتوى يطفو فوق الفيديو */
 .hero-content {
-    position: relative; /* (كان موجوداً مسبقاً) */
-    z-index: 2; /* 9. رفعه ليكون فوق الفيديو (z-index: 1) */
+    position: relative;
+    /* (كان موجوداً مسبقاً) */
+    z-index: 2;
+    /* 9. رفعه ليكون فوق الفيديو (z-index: 1) */
 }
 
 /* ======== تنسيق الفوتر (ذيل الصفحة) ======== */
